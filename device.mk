@@ -196,26 +196,21 @@ PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/seccomp,$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy)
 
 # Overlays
+$(call inherit-product, hardware/mediatek/overlay/mssi.mk)
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
-    CarrierConfigOverlayP661N \
-    FrameworksResOverlayP661N \
-    Launcher3OverlayP661N \
-    SettingsProviderOverlayP661N \
-    SettingsResOverlayP661N \
-    SystemUIOverlayP661N \
-    TetheringResOverlayP661N \
-    WifiOverlayP661N
+    FrameworksResTarget \
+    SettingsProviderResTarget \
+    SettingsResTarget \
+    SystemUIResTarget \
+    TetheringConfigTarget \
+    WifiResTarget
 
-PRODUCT_PACKAGES += \
-    NcmTetheringOverlay
 
 # Lineage-specific overlays
 PRODUCT_PACKAGES += \
-    LineageApertureOverlayP661N \
-    LineageDialerOverlayP661N \
-    LineageSDKOverlayP661N
+    ApertureResTarget
 
 # Permissions
 PRODUCT_COPY_FILES += \
