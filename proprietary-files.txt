@@ -1089,22 +1089,39 @@ vendor/lib64/libvendor.goodix.hardware.biometrics.fingerprint@2.1.so;DISABLE_DEP
 
 # Firmware
 vendor/firmware/BT_FW.cfg
+vendor/firmware/BT_FW.cfg:recovery/root/vendor/firmware/BT_FW.cfg
 vendor/firmware/WIFI_RAM_CODE_soc2_2_1_1.bin
+vendor/firmware/WIFI_RAM_CODE_soc2_2_1_1.bin:recovery/root/vendor/firmware/WIFI_RAM_CODE_soc2_2_1_1.bin
 vendor/firmware/WIFI_RAM_CODE_soc2_2_1a_1.bin
+vendor/firmware/WIFI_RAM_CODE_soc2_2_1a_1.bin:recovery/root/vendor/firmware/WIFI_RAM_CODE_soc2_2_1a_1.bin
 vendor/firmware/WMT_SOC.cfg
+vendor/firmware/WMT_SOC.cfg:recovery/root/vendor/firmware/WMT_SOC.cfg
 vendor/firmware/chipone_ts_fw_00.bin
+vendor/firmware/chipone_ts_fw_00.bin:recovery/root/vendor/firmware/chipone_ts_fw_00.bin
 vendor/firmware/fm_cust.cfg
+vendor/firmware/fm_cust.cfg:recovery/root/vendor/firmware/fm_cust.cfg
 vendor/firmware/lib3a.ccu
+vendor/firmware/lib3a.ccu:recovery/root/vendor/firmware/lib3a.ccu
 vendor/firmware/mt6631_fm_v1_coeff.bin
+vendor/firmware/mt6631_fm_v1_coeff.bin:recovery/root/vendor/firmware/mt6631_fm_v1_coeff.bin
 vendor/firmware/mt6631_fm_v1_patch.bin
+vendor/firmware/mt6631_fm_v1_patch.bin:recovery/root/vendor/firmware/mt6631_fm_v1_patch.bin
 vendor/firmware/remoteproc_scp
+vendor/firmware/remoteproc_scp:recovery/root/vendor/firmware/remoteproc_scp
 vendor/firmware/soc2_2_ram_bt_1_1_hdr.bin
+vendor/firmware/soc2_2_ram_bt_1_1_hdr.bin:recovery/root/vendor/firmware/soc2_2_ram_bt_1_1_hdr.bin
 vendor/firmware/soc2_2_ram_bt_1a_1_hdr.bin
+vendor/firmware/soc2_2_ram_bt_1a_1_hdr.bin:recovery/root/vendor/firmware/soc2_2_ram_bt_1a_1_hdr.bin
 vendor/firmware/soc2_2_ram_mcu_1_1_hdr.bin
+vendor/firmware/soc2_2_ram_mcu_1_1_hdr.bin:recovery/root/vendor/firmware/soc2_2_ram_mcu_1_1_hdr.bin
 vendor/firmware/soc2_2_ram_mcu_1a_1_hdr.bin
+vendor/firmware/soc2_2_ram_mcu_1a_1_hdr.bin:recovery/root/vendor/firmware/soc2_2_ram_mcu_1a_1_hdr.bin
 vendor/firmware/soc2_2_ram_wifi_1_1_hdr.bin
+vendor/firmware/soc2_2_ram_wifi_1_1_hdr.bin:recovery/root/vendor/firmware/soc2_2_ram_wifi_1_1_hdr.bin
 vendor/firmware/soc2_2_ram_wifi_1a_1_hdr.bin
+vendor/firmware/soc2_2_ram_wifi_1a_1_hdr.bin:recovery/root/vendor/firmware/soc2_2_ram_wifi_1a_1_hdr.bin
 vendor/firmware/wifi.cfg
+vendor/firmware/wifi.cfg:recovery/root/vendor/firmware/wifi.cfg
 
 # Fuelgauge
 vendor/bin/fuelgauged
