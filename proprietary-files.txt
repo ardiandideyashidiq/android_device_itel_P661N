@@ -1,3 +1,6 @@
+system_ext/lib64/libaudiotoolkit.so
+
+
 # Unpinned blobs from sys_tssi_64_armv82_itel-user 13 TP1A.220624.014 928046 release-keys
 
 # AAL
@@ -1079,11 +1082,11 @@ vendor/lib64/liburee_meta_drmkeyinstall.so
 vendor/lib64/libwvhidl.so
 
 # EngineerMode
-system/system/priv-app/EngineerMode/EngineerMode.apk
-system/system/lib64/libem_aoltest_jni.so
-system/system/lib64/libem_audio_jni.so
-system/system/lib64/libem_support_jni.so
-system/system/lib64/libem_wifi_jni.so
+system/priv-app/EngineerMode/EngineerMode.apk
+system/lib64/libem_aoltest_jni.so
+system/lib64/libem_audio_jni.so
+system/lib64/libem_support_jni.so
+system/lib64/libem_wifi_jni.so
 vendor/lib64/vendor.mediatek.hardware.engineermode@1.0.so
 vendor/lib64/vendor.mediatek.hardware.engineermode@1.1.so
 vendor/lib64/vendor.mediatek.hardware.engineermode@1.2.so
