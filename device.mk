@@ -322,7 +322,7 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service
+    android.hardware.biometrics.fingerprint@2.1.vendor
 
 # Thermal
 PRODUCT_PACKAGES += \
