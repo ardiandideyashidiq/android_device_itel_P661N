@@ -1,0 +1,54 @@
+# Lunaris maintainer
+ro.lunaris.maintainer=R
+
+# audio
+persist.vendor.anr.dumpthr=1
+ro.audio.silent=0
+ro.audio.usb.period_us=16000
+ro.camera.sound.forced=0
+ro.config.alarm_vol_default=13
+ro.config.media_vol_default=13
+ro.config.system_vol_default=15
+ro.config.vc_call_vol_default=11
+
+# Bluetooth
+bluetooth.profile.a2dp.source.enabled=true
+bluetooth.profile.avrcp.target.enabled=true
+bluetooth.profile.bas.client.enabled=true
+bluetooth.profile.gatt.enabled=true
+bluetooth.profile.hfp.ag.enabled=true
+bluetooth.profile.hid.device.enabled=true
+bluetooth.profile.hid.host.enabled=true
+bluetooth.profile.map.server.enabled=true
+bluetooth.profile.opp.enabled=true
+bluetooth.profile.pan.nap.enabled=true
+bluetooth.profile.pan.panu.enabled=true
+bluetooth.profile.pbap.server.enabled=true
+bluetooth.profile.sap.server.enabled=true
+
+# Blur
+ro.sf.blurs_are_expensive=1
+ro.surface_flinger.supports_background_blur=1
+
+# media
+vendor.mtk_thumbnail_optimization=true
+
+# USB
+ro.sys.usb.bicr=no
+ro.sys.usb.charging.only=yes
+ro.sys.usb.mtp.whql.enable=0
+ro.sys.usb.storage.type=mtp
+ro.usb.connect.keycodes=100,200
+
+# Wi-Fi
+mediatek.wlan.ctia=0
+persist.vendor.wfc.sys_wfc_support=1
+ro.mediatek.wlan.p2p=1
+ro.mediatek.wlan.wsc=1
+wifi.direct.interface=p2p0
+wifi.interface=wlan0
+wifi.tethering.interface=ap0
+
+# MTK vendor
+ro.vendor.mtk_omacp_support=1
+ro.vendor.mtk_telephony_add_on_policy=0

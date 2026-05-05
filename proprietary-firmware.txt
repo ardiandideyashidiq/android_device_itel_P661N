@@ -1,0 +1,14 @@
+# Unpinned blobs from sys_tssi_64_armv82_itel-user 13 TP1A.220624.014 928046 release-keys
+
+dpm.img;AB
+gz.img;AB
+lk.img;AB
+logo.bin:logo.img;AB
+mcupm.img;AB
+md1img.img;AB
+pi_img.img;AB
+scp.img;AB
+spmfw.img;AB
+sspm.img;AB
+tee.img;AB
+tkv.img;AB

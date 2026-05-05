@@ -1,0 +1,14 @@
+allow hal_health_default sysfs_batteryinfo:file { getattr open read };
+allow hal_health_default sysfs_batteryinfo:dir search;
+allow hal_health_default sysfs_power_supply:file { getattr open read };
+allow hal_health_default sysfs_power_supply:dir search;
+allow hal_health_default sysfs:file read;
+
+# Label for usb_switch sysfs node
+type sysfs_usb_switch, fs_type, sysfs_type;
+
+# Allow hal_health_default to access usb_switch sysfs
+allow hal_health_default sysfs_usb_switch:file { read open getattr };
+
+allow hal_health_default sysfs:file { open read getattr };
+allow hal_health_default sysfs_usb_switch:dir { search };

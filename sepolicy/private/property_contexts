@@ -1,0 +1,6 @@
+# Audio
+ro.vendor.qti.va_aosp.support               u:object_r:vendor_exported_system_prop:s0 exact bool
+
+ro.mtk_cam_dualzoom_support                 u:object_r:vendor_mtk_camera_prop:s0
+ro.mtk_cam_stereo_camera_support            u:object_r:vendor_mtk_camera_prop:s0
+ro.mtk_key_manager_support                  u:object_r:vendor_mtk_default_prop:s0
