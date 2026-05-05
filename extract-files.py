@@ -80,9 +80,12 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libutils-v32.so'),
     ('vendor/bin/mnld', 'vendor/lib64/libaalservice.so', 'vendor/lib64/libcam.utils.sensorprovider.so'): blob_fixup()
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
-    'vendor/bin/hw/vendor.mediatek.hardware.pq@2.2-service': blob_fixup()
+    ('vendor/lib64/hw/vendor.mediatek.hardware.pq@2.15-impl.so', 'vendor/bin/hw/vendor.mediatek.hardware.pq@2.2-service'): blob_fixup()
+        .replace_needed('libhidlbase.so', 'libhidlbase-v32.so')
+        .replace_needed('libbinder.so', 'libbinder-v32.so')
+        .replace_needed('libutils.so', 'libutils-v32.so')
         .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')
-        .replace_needed('libutils.so', 'libutils-v32.so'),
+        .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
     'vendor/etc/init/android.hardware.media.c2@1.2-mediatek-64b.rc': blob_fixup()
         .regex_replace('mediatek', 'mediatek-64b'),
     'vendor/etc/init/android.hardware.neuralnetworks@1.3-service-mtk-neuron.rc': blob_fixup()
@@ -109,8 +112,6 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/hw/mt6789/vendor.mediatek.hardware.camera.isphal@1.0-impl.so': blob_fixup()
         .replace_needed('libhidlbase.so', 'libhidlbase-v32.so')
         .replace_needed('libbinder.so', 'libbinder-v32.so')
-        .replace_needed('libutils.so', 'libutils-v32.so'),
-    'vendor/lib64/hw/vendor.mediatek.hardware.pq@2.13-impl.so': blob_fixup()
         .replace_needed('libutils.so', 'libutils-v32.so'),
     ('vendor/lib64/lib3a.ae.stat.so', 'vendor/lib64/lib3a.sensors.color.so', 'vendor/lib64/lib3a.sensors.flicker.so', 'vendor/lib64/libteei_daemon_vfs.so',
      'vendor/lib64/lib3a.flash.so', 'vendor/lib64/libwvhidl.so', 'vendor/lib64/mediadrm/libwvdrmengine.so'): blob_fixup()
