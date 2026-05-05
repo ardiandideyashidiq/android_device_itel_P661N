@@ -89,8 +89,6 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace('mediatek', 'mediatek-64b'),
     'vendor/etc/init/android.hardware.neuralnetworks@1.3-service-mtk-neuron.rc': blob_fixup()
         .regex_replace('start', 'enable'),
-    'vendor/etc/init/init.vtservice_hidl.rc': blob_fixup()
-        .regex_replace('start', 'enable'),
     'vendor/etc/vintf/manifest/manifest_media_c2_V1_2_default.xml': blob_fixup()
         .regex_replace('1.1', '1.2'),
     'vendor/lib/librt_extamp_intf.so': blob_fixup()
@@ -119,8 +117,6 @@ blob_fixups: blob_fixups_user_type = {
     ('vendor/lib64/lib3a.ae.stat.so', 'vendor/lib64/lib3a.sensors.color.so', 'vendor/lib64/lib3a.sensors.flicker.so', 'vendor/lib64/libteei_daemon_vfs.so',
      'vendor/lib64/lib3a.flash.so', 'vendor/lib64/libwvhidl.so', 'vendor/lib64/mediadrm/libwvdrmengine.so'): blob_fixup()
         .replace_needed('libprotobuf-cpp-lite-3.9.1.so', 'libprotobuf-cpp-full-3.9.1.so')
-        .add_needed('liblog.so'),
-    ('vendor/lib64/libaaa_ltm.so', 'vendor/lib64/libSQLiteModule_VER_ALL.so'): blob_fixup()
         .add_needed('liblog.so'),
     ('vendor/lib64/libalLDC.so', 'vendor/lib64/libalhLDC.so', 'vendor/lib64/libeffect_hal.so', 'vendor/lib64/libtranssion_bodybeauty.so'): blob_fixup()
         .clear_symbol_version('AHardwareBuffer_allocate')
