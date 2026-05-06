@@ -6,6 +6,17 @@ on init
     setprop vendor.usb.controller "musb-hdrc"
 
 on boot
+    write /sys/class/android_usb/android0/f_mtp/cpu_mask 0x80
+    write /sys/module/usb_f_mtp/parameters/mtp_rx_cont 1
+    chmod 0664 /sys/class/android_usb/android0/iSerial
+    chown root system /sys/class/android_usb/android0/iSerial
+
+    #SDD: add multi device name by lijia.chen 2020.08.10 start
+    chmod a+x config/usb_gadget/g1
+    chmod a+x config/usb_gadget/g1/strings/0x409
+    chmod 0666 /config/usb_gadget/g1/strings/0x409/product
+    #SDD: add multi device name by lijia.chen 2020.08.10 end
+
     # for usb otg sdcard hot plug detection
     write /sys/module/block/parameters/events_dfl_poll_msecs 1000
 
