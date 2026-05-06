@@ -216,9 +216,6 @@ PRODUCT_PACKAGES += \
     TetheringConfigTarget \
     WifiResTarget
 
-PRODUCT_PACKAGES += \
-    UpdaterResTarget
-
 # Lineage-specific overlays
 PRODUCT_PACKAGES += \
     ApertureResTarget
