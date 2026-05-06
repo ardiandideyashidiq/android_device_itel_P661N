@@ -22,6 +22,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 
+AB_OTA_UPDATER := true
+
 # A/B
 PRODUCT_PACKAGES += \
     android.hardware.boot-service.default_recovery \
@@ -34,7 +36,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     update_engine \
     update_engine_sideload \
-    update_verifier
+    update_verifier \
+    checkpoint_gc
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
