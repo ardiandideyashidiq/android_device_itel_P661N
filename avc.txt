@@ -1,0 +1,41 @@
+Source: /home/rd/Documents/log-boot.txt
+Scope: actionable SELinux AVC denials only
+Notes:
+- permissive=1 audit noise omitted
+- repeated inode-specific `system_suspend` denials normalized by stripping `ino=...`
+
+avc:  denied  { call } for  scontext=u:r:bootstat:s0 tcontext=u:r:servicemanager:s0 tclass=binder permissive=0
+avc:  denied  { ioctl } for  path="/dev/block/vold/public:179,1" dev="tmpfs" ioctlcmd=0x127b scontext=u:r:fsck_untrusted:s0 tcontext=u:object_r:vold_device:s0 tclass=blk_file permissive=0
+avc:  denied  { ptrace } for  scontext=u:r:init:s0 tcontext=u:r:hal_fingerprint_default:s0 tclass=process permissive=0
+avc:  denied  { read } for  comm=52696C2050726F7879204D61696E20 name="u:object_r:default_prop:s0" dev="tmpfs" scontext=u:r:rild:s0 tcontext=u:object_r:default_prop:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="/" dev="dm-7" scontext=u:r:hal_fingerprint_default:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=0
+avc:  denied  { read } for  name="active_count" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="active_count" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="active_time_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="active_time_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="event_count" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="event_count" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="expire_count" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="expire_count" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="last_change_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="last_change_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="max_time_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="max_time_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="name" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="name" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="prevent_suspend_time_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="prevent_suspend_time_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="total_time_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="total_time_ms" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="tranfs" dev="tmpfs" scontext=u:r:fsck:s0 tcontext=u:object_r:tmpfs:s0 tclass=lnk_file permissive=0
+avc:  denied  { read } for  name="u:object_r:default_prop:s0" dev="tmpfs" scontext=u:r:ccci_rpcd:s0 tcontext=u:object_r:default_prop:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="u:object_r:default_prop:s0" dev="tmpfs" scontext=u:r:mtk_hal_camera:s0 tcontext=u:object_r:default_prop:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="u:object_r:vendor_default_prop:s0" dev="tmpfs" scontext=u:r:mediaserver:s0 tcontext=u:object_r:vendor_default_prop:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="wakeup_count" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=0
+avc:  denied  { read } for  name="wakeup_count" dev="sysfs" scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_batteryinfo:s0 tclass=file permissive=0
+avc:  denied  { search } for  name="data" dev="dm-54" scontext=u:r:mtk_hal_camera:s0 tcontext=u:object_r:system_data_file:s0:c512,c768 tclass=dir permissive=0
+avc:  denied  { search } for  name="displowpower" dev="debugfs" scontext=u:r:kernel:s0 tcontext=u:object_r:debugfs_fb:s0 tclass=dir permissive=0
+avc:  denied  { search } for  name="mmcblk0" dev="sysfs" scontext=u:r:fsck_untrusted:s0 tcontext=u:object_r:sysfs_devices_block:s0 tclass=dir permissive=0
+avc:  denied  { search } for  name="mtkfb_debug" dev="debugfs" scontext=u:r:kernel:s0 tcontext=u:object_r:debugfs_fb:s0 tclass=dir permissive=0
+avc:  denied  { search } for  name="tmp" dev="dm-54" scontext=u:r:mtk_hal_camera:s0 tcontext=u:object_r:shell_data_file:s0 tclass=dir permissive=0
+avc:  denied  { write } for  name="vendor_de" dev="dm-54" scontext=u:r:vendor_init:s0 tcontext=u:object_r:vendor_userdir_file:s0 tclass=dir permissive=0
