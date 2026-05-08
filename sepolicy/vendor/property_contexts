@@ -7,8 +7,6 @@ vendor.camera.                              u:object_r:vendor_camera_prop:s0
 vendor.debug.                               u:object_r:vendor_camera_prop:s0
 vendor.mtkcam.                              u:object_r:vendor_camera_prop:s0
 ro.vendor.mtkcam.                           u:object_r:vendor_camera_prop:s0
-debuglog.drv.                               u:object_r:vendor_mtk_camera_prop:s0
-st_repair.debug.                            u:object_r:vendor_mtk_camera_prop:s0
 vendor.debug.seninf.hs_trail                u:object_r:vendor_mtk_camera_prop:s0
 ro.vendor.camera_tran_hal_server_support    u:object_r:vendor_mtk_camera_prop:s0
 ro.vendor.camera_tran_fake_stereo_support   u:object_r:vendor_mtk_camera_prop:s0
@@ -38,7 +36,6 @@ ro.vendor.oem.sno u:object_r:vendor_mtk_radio_prop:s0
 ro.vendor.oem.psno u:object_r:vendor_mtk_radio_prop:s0
 ro.vendor.oem.imei u:object_r:vendor_mtk_radio_prop:s0
 ro.vendor.oem.meid u:object_r:vendor_mtk_radio_prop:s0
-ro.tran_single_vism_support u:object_r:vendor_mtk_radio_prop:s0
 
 # Display
 vendor.display.vds_allow_hwc u:object_r:vendor_exported_system_prop:s0 exact bool
