@@ -82,7 +82,7 @@ TARGET_DYNAMIC_64_32_MEDIASERVER := true
 TARGET_NO_KERNEL_OVERRIDE := true
 
 # Workaround to make lineage's soong generator work
-TARGET_KERNEL_SOURCE := device/infinix/X670-kernel/kernel-headers
+TARGET_KERNEL_SOURCE := device/itel/P661N-kernel/kernel-headers
 
 PRODUCT_COPY_FILES += \
     $(KERNEL_PATH)/Image.gz:kernel
