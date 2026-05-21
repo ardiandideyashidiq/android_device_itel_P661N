@@ -12,7 +12,16 @@
      entries do not follow the convention, but all new entries should. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- Indicates that 11ax mode is supported on this device. -->
+    <bool name="config_wifi11axSupportOverride">true</bool>
+
     <!-- Default access point SSID used for tethering -->
     <string name="wifi_tether_configure_ssid_default" translatable="false">itel P55 5G</string>
+
+    <!-- Keep SAE auto-upgrade disabled for transition-mode AP compatibility. -->
+    <bool name="config_wifiSaeUpgradeEnabled">false</bool>
+
+    <!-- Preserve the shorter disconnect delay used before the overlay refactor. -->
+    <integer translatable="false" name="config_wifiDelayDisconnectOnImsLostMs">10</integer>
 
 </resources>

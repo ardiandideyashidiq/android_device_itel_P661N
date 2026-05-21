@@ -37,6 +37,9 @@ ro.vendor.oem.psno u:object_r:vendor_mtk_radio_prop:s0
 ro.vendor.oem.imei u:object_r:vendor_mtk_radio_prop:s0
 ro.vendor.oem.meid u:object_r:vendor_mtk_radio_prop:s0
 
+# Display
+vendor.display.vds_allow_hwc u:object_r:vendor_exported_system_prop:s0 exact bool
+
 # Thermal
 vendor.sys.thermal. u:object_r:vendor_thermal_engine_prop:s0
 
