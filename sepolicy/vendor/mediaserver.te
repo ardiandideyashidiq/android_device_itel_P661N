@@ -1,1 +1,2 @@
 allow mediaserver media_quality_service:service_manager find;
+get_prop(mediaserver, vendor_exported_system_prop)
