@@ -5,42 +5,55 @@
 
 DEVICE_PATH := device/itel/P661N
 KERNEL_PATH := $(DEVICE_PATH)-kernel
-
-# A/B
-AB_OTA_PARTITIONS += \
-    boot \
-    system \
-    system_ext \
-    product \
-    vendor \
-    vendor_boot \
-    vbmeta \
-    vbmeta_system \
-    vbmeta_vendor
+CONFIGS_PATH := $(DEVICE_PATH)/configs
+COMMON_GKI_PATH := device/millennium/common-kernel
 
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a-dotprod
 TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := cortex-a76
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a55
+TARGET_2ND_CPU_VARIANT := generic
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 
-# Asserts
-TARGET_OTA_ASSERT_DEVICE := P661N
+# Force any prefer32 targets to be compiled as 64 bit.
+IGNORE_PREFER32_ON_DEVICE := true
 
-# Boot Image
+# Include 64-bit mediaserver to support 64-bit only devices
+TARGET_DYNAMIC_64_32_MEDIASERVER := true
+
+# Include 64-bit drmserver to support 64-bit only devices
+TARGET_DYNAMIC_64_32_DRMSERVER := true
+
+# Enable 64-bit for non-zygote.
+ZYGOTE_FORCE_64 := true
+
+# ART
+ifeq ($(TARGET_BUILD_VARIANT),user)
+ART_BUILD_TARGET_NDEBUG := true
+ART_BUILD_TARGET_DEBUG := false
+ART_BUILD_HOST_NDEBUG := true
+ART_BUILD_HOST_DEBUG := false
+endif
+
+# Audio
+BOARD_USES_ALSA_AUDIO := true
+AUDIO_FEATURE_ENABLED_DS2_DOLBY_DAP := true
+
+# Boot image
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_KERNEL_SEPARATED_DTBO := true
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_KERNEL_CMDLINE += bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
+BOARD_KERNEL_CMDLINE += androidboot.serialconsole=0
 
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_BASE := 0x40078000
@@ -56,54 +69,6 @@ BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := P661N
-TARGET_NO_BOOTLOADER := true
-
-# Display
-TARGET_SCREEN_DENSITY := 320
-
-# Audio
-BOARD_USES_ALSA_AUDIO := true
-AUDIO_FEATURE_ENABLED_DS2_DOLBY_DAP := true
-
-# Enable 64-bit for non-zygote.
-ZYGOTE_FORCE_64 := true
-
-# Include 64-bit drmserver to support 64-bit only devices
-TARGET_DYNAMIC_64_32_DRMSERVER := true
-
-# Include 64-bit mediaserver to support 64-bit only devices
-TARGET_DYNAMIC_64_32_MEDIASERVER := true
-
-# Kernel
-
-# Kill lineage kernel build task while preserving kernel
-TARGET_NO_KERNEL_OVERRIDE := true
-
-# Workaround to make lineage's soong generator work
-TARGET_KERNEL_SOURCE := device/itel/P661N-kernel/kernel-headers
-
-PRODUCT_COPY_FILES += \
-    $(KERNEL_PATH)/Image.gz:kernel
-
-# DTB
-BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbo.img
-BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtb
-
-# Kernel modules
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/modules/vendor_ramdisk/modules.load))
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(addprefix $(KERNEL_PATH)/modules/vendor_ramdisk/, $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD))
-
-# Also add recovery modules to vendor ramdisk
-BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/modules/vendor_ramdisk/modules.load.recovery))
-RECOVERY_MODULES := $(addprefix $(KERNEL_PATH)/modules/vendor_ramdisk/, $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD))
-
-# Prevent duplicated entries (to solve duplicated build rules problem)
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(sort $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES) $(RECOVERY_MODULES))
-
-BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/modules/vendor/modules.load))
-BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(KERNEL_PATH)/modules/vendor/*.ko)
 
 # Partitions
 SSI_PARTITIONS := product system system_ext
@@ -125,10 +90,9 @@ $(foreach p, $(call to-upper, $(ALL_PARTITIONS)), \
 endif
 
 BOARD_FLASH_BLOCK_SIZE := 131072
-BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
+BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_USES_METADATA_PARTITION := true
 
 BOARD_SUPER_PARTITION_SIZE := 9269870592
 BOARD_SUPER_PARTITION_GROUPS := mtk_dynamic_partitions
@@ -136,51 +100,44 @@ BOARD_SUPER_PARTITION_GROUPS := mtk_dynamic_partitions
 BOARD_MTK_DYNAMIC_PARTITIONS_PARTITION_LIST := $(ALL_PARTITIONS)
 BOARD_MTK_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304)
 
-BOARD_EROFS_COMPRESS_HINTS := $(DEVICE_PATH)/configs/erofs_compress_hints.txt
-BOARD_SYSTEMIMAGE_EROFS_COMPRESS_HINTS := $(DEVICE_PATH)/configs/erofs_compress_hints.txt
-BOARD_SYSTEM_EXTIMAGE_EROFS_COMPRESS_HINTS := $(DEVICE_PATH)/configs/erofs_compress_hints.txt
-BOARD_PRODUCTIMAGE_EROFS_COMPRESS_HINTS := $(DEVICE_PATH)/configs/erofs_compress_hints.txt
-BOARD_VENDORIMAGE_EROFS_COMPRESS_HINTS := $(DEVICE_PATH)/configs/erofs_compress_hints.txt
+BOARD_EROFS_PCLUSTER_SIZE := 262144
+BOARD_USES_METADATA_PARTITION := true
 
--include vendor/lineage/config/BoardConfigReservedSize.mk
+BOARD_EROFS_COMPRESS_HINTS := $(CONFIGS_PATH)/erofs_compress_hints.txt
+BOARD_SYSTEMIMAGE_EROFS_COMPRESS_HINTS := $(CONFIGS_PATH)/erofs_compress_hints.txt
+BOARD_SYSTEM_EXTIMAGE_EROFS_COMPRESS_HINTS := $(CONFIGS_PATH)/erofs_compress_hints.txt
+BOARD_VENDORIMAGE_EROFS_COMPRESS_HINTS := $(CONFIGS_PATH)/erofs_compress_hints.txt
+BOARD_PRODUCTIMAGE_EROFS_COMPRESS_HINTS := $(CONFIGS_PATH)/erofs_compress_hints.txt
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6833
 
 # Properties
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/configs/props/system.prop
-TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/props/vendor.prop
-
-# RIL
-ENABLE_VENDOR_RIL_SERVICE := true
+TARGET_SYSTEM_PROP += $(CONFIGS_PATH)/properties/system.prop
+TARGET_VENDOR_PROP += $(CONFIGS_PATH)/properties/vendor.prop
 
 # Recovery
+BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.mt6833
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.mt6789
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
-TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-
-# Disable sparse on all filesystem images
-TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
-TARGET_USERIMAGES_SPARSE_EROFS_DISABLED := true
-TARGET_USERIMAGES_SPARSE_F2FS_DISABLED := true
 
 # SEPolicy
 include device/mediatek/sepolicy_vndr/SEPolicy.mk
 
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 
-# Security Patch Level
+# Vendor Security Patch
+BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
 
 BOARD_AVB_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_BOOT_ALGORITHM := SHA256_RSA2048
@@ -199,18 +156,24 @@ BOARD_AVB_VBMETA_VENDOR_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX := 1
 BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION := 3
 
-# Vintf
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    $(DEVICE_PATH)/configs/vintf/device_framework_compatibility_matrix.xml \
-    hardware/mediatek/vintf/mediatek_framework_compatibility_matrix.xml
+BOARD_AVB_PRODUCT_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_SYSTEM_EXT_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 
-DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/vintf/manifest.xml
-DEVICE_MATRIX_FILE := $(DEVICE_PATH)/configs/vintf/compatibility_matrix.xml
+# VINTF
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+   $(CONFIGS_PATH)/vintf/device_framework_compatibility_matrix.xml \
+   hardware/mediatek/vintf/mediatek_framework_compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(CONFIGS_PATH)/vintf/manifest.xml
+DEVICE_MATRIX_FILE := $(CONFIGS_PATH)/vintf/compatibility_matrix.xml
 
-# WiFi
+# Wi-Fi
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_mt66xx
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mt66xx
 WIFI_DRIVER_FW_PATH_PARAM := "/dev/wmtWifi"
 WIFI_DRIVER_FW_PATH_STA := "STA"
 WIFI_DRIVER_FW_PATH_AP := "AP"
@@ -218,8 +181,37 @@ WIFI_DRIVER_FW_PATH_P2P := "P2P"
 WIFI_DRIVER_STATE_CTRL_PARAM := "/dev/wmtWifi"
 WIFI_DRIVER_STATE_ON := "1"
 WIFI_DRIVER_STATE_OFF := "0"
-WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
+WIFI_HAL_INTERFACE_COMBINATIONS := {{{STA}, 2}}
+WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{AP_BRIDGED}, 1},}
+WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{AP}, 1}}
+WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{P2P}, 1}}
+WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{NAN}, 1}}
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 
-# Inherit the proprietary files
+# P661N-specific overrides
+TARGET_BOOTLOADER_BOARD_NAME := mt6833
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+TARGET_SCREEN_DENSITY := 320
+BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbo.img
+BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtb
+
+TARGET_NO_KERNEL_OVERRIDE := true
+LOCAL_KERNEL := $(COMMON_GKI_PATH)/chihiro/Image.gz
+PRODUCT_COPY_FILES += \
+	$(LOCAL_KERNEL):kernel
+
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/ramdisk/modules.load))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(addprefix $(KERNEL_PATH)/ramdisk/, $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD))
+
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/ramdisk/modules.load.recovery))
+RECOVERY_MODULES := $(addprefix $(KERNEL_PATH)/ramdisk/, $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(sort $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES) $(RECOVERY_MODULES))
+
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/vendor_dlkm/modules.load))
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(KERNEL_PATH)/vendor_dlkm/*.ko)
+
+TARGET_OTA_ASSERT_DEVICE := P661N,itel-P661N
+TARGET_KERNEL_SOURCE := $(COMMON_GKI_PATH)/kernel-headers
+
+# Inherit proprietary blobs
 include vendor/itel/P661N/BoardConfigVendor.mk
