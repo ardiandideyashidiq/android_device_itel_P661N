@@ -4,11 +4,3 @@ on init
     setprop sys.usb.ffs.ready 1
     setprop sys.usb.controller "musb-hdrc"
     setprop vendor.usb.controller "musb-hdrc"
-
-on boot
-    # for usb otg sdcard hot plug detection
-    write /sys/module/block/parameters/events_dfl_poll_msecs 1000
-
-    #SDD:add OTG feature for TESSCR-6368 by weike.xu 20210512 start
-    chmod 0666 /sys/devices/platform/odm/odm:tran_battery/OTG_CTL
-    write /sys/devices/platform/odm/odm:tran_battery/OTG_CTL "1"
