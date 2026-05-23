@@ -35,7 +35,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 LINEAGE_VERSION_APPEND_TIME_OF_DAY := true
 
 WITH_GAPPS := true
-WITH_GMS := true
+WITH_GMS := false
 
 # Ship Basic Call Recorder App
 WITH_BCR := true

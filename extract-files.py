@@ -30,6 +30,7 @@ namespace_imports = [
     "hardware/mediatek",
     "hardware/mediatek/libmtkperf_client",
     "device/itel/P661N",
+    "hardware/mediatek/libaedv",
 ]
 
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
