@@ -1152,7 +1152,7 @@ vendor/lib64/hw/libMcGatekeeper.so;SYMLINK=vendor/lib64/hw/gatekeeper.trustonic.
 vendor/lib64/hw/libSoftGatekeeper.so;SYMLINK=vendor/lib64/hw/gatekeeper.default.so
 
 # Display (Mali)
-vendor/lib64/mt6789/arm.graphics-V1-ndk_platform.so;SYMLINK=vendor/lib64/arm.graphics-V1-ndk_platform.so
+vendor/lib64/arm.graphics-V1-ndk_platform.so
 
 # Display (Mali) - from XT2513-1_KANSAS_OPENLA_15_V1VK35.22-125_subsidy-DEFAULT_regulatory-DEFAULT_cid50_CFC
 vendor/lib64/egl/libGLES_mali.so|0d7ee65504a0bedc798b900cbb96f41b6b88b038
