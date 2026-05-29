@@ -12,6 +12,10 @@ on init
     # OTG
     write /sys/devices/platform/odm/odm:tran_battery/OTG_CTL 1
 
+    # DT2W gesture node
+    chown system system /proc/gesture_function
+    chmod 0660 /proc/gesture_function
+
 on post-fs-data
 
 #Camera
