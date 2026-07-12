@@ -3,6 +3,3 @@ type hal_trancamserver_hwservice, hwservice_manager_type;
 
 # TNE
 type hal_tnev_hwservice, hwservice_manager_type;
-
-# Fingerprint
-type hal_fingerprint_hwservice, hwservice_manager_type;
