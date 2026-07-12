@@ -1,3 +1,7 @@
+
+# USB
+vendor.usb.controller=musb-hdrc
+
 # ART
 dalvik.vm.dex2oat-minidebuginfo=false
 dalvik.vm.minidebuginfo=false

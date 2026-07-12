@@ -243,7 +243,6 @@ PRODUCT_PACKAGES += \
     init.connectivity.rc \
     init.modem.rc \
     init.mt6833.rc \
-    init.mt6833.usb.rc \
     init.project.rc \
     init.recovery.mt6833.rc \
     init.sensor_2_0.rc \
@@ -507,7 +506,8 @@ $(call soong_config_set_bool,android_hardware_mediatek_usb,audio_accessory_suppo
 
 PRODUCT_PACKAGES += \
     android.hardware.usb-service.mediatek \
-    android.hardware.usb.gadget-service.mediatek
+    android.hardware.usb.gadget-service.mediatek \
+    init.mt6833.usb.rc
 
 # userdata
 PRODUCT_FS_COMPRESSION := 1
