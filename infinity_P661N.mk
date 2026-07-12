@@ -11,10 +11,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/itel/P661N/device.mk)
 
 # Inherit some common Lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/infinity/config/common_full_phone.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_NAME := lineage_P661N
+PRODUCT_NAME := infinity_P661N
 PRODUCT_DEVICE := P661N
 PRODUCT_MANUFACTURER := itel
 PRODUCT_BRAND := Itel
@@ -67,3 +67,7 @@ AXION_MAINTAINER := R
 AXION_PROCESSOR := Mediatek_Dimensity_6080
 
 TARGET_INCLUDES_LOS_PREBUILTS := true
+
+# Maintainer Name
+INFINITY_MAINTAINER := "R"
+
