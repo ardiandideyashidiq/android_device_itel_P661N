@@ -6,6 +6,7 @@ allow hal_audio_default sysfs_boot_info:file r_file_perms;
 allow hal_audio_default vow_device:chr_file rw_file_perms;
 
 allow hal_audio_default aw87xxx_vmax:file { read getattr open };
+allow hal_audio_default sysfs:file { read getattr open };
 allow hal_audio_default sysfs_boot_info:file r_file_perms;
 
 rw_dir_file(hal_audio_default, sysfs_batteryinfo)
