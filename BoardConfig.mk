@@ -6,7 +6,7 @@
 DEVICE_PATH := device/itel/P661N
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 CONFIGS_PATH := $(DEVICE_PATH)/configs
-COMMON_GKI_PATH := device/millennium/common-kernel
+COMMON_GKI_PATH := device/gki/common-kernel
 
 # Architecture
 TARGET_ARCH := arm64
