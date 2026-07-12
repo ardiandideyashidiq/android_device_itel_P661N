@@ -57,8 +57,6 @@ allow hal_sensors_default sensor_data_file:dir search;
 allow hal_sensors_default hal_graphics_allocator_default:fd use;
 allow hal_sensors_default merged_hal_service:fd use;
 
-binder_call(hal_sensors_default, system_server)
-
 rw_dir_file(hal_sensors_default, nvdata_file)
 rw_dir_file(hal_sensors_default, sensor_data_file)
 
@@ -66,8 +64,5 @@ rw_dir_file(hal_sensors_default, sensor_data_file)
 get_prop(hal_sensors_default, vendor_dynamic_sensor_prop)
 
 # Allow access to raw HID devices for dynamic sensors.
-allow hal_sensors_default device:dir r_dir_perms;
+allow hal_sensors_default device:dir search;
 allow hal_sensors_default hidraw_device:chr_file rw_file_perms;
-
-allow hal_sensors_default proc_bootconfig:file { read open getattr };
-allow hal_sensors_default proc_cmdline:file { read open getattr };
