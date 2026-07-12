@@ -4,7 +4,7 @@ on early-init
     write /sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq 2400000
     write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 4266000000
 
-on property:init.svc.vendor.charger=running
+on charger
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 0
     write /sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq 0
     write /sys/class/devfreq/mtk-dvfsrc-devfreq/userspace/set_freq 0
@@ -92,6 +92,14 @@ on init
     write /proc/sys/kernel/sched_latency_ns 4000000
     write /proc/sys/kernel/sched_min_granularity_ns 500000
     write /proc/sys/kernel/sched_wakeup_granularity_ns 2000000
+
+    # Mali GPU sysfs nodes for libperfmgr (powerhint.json)
+    chown system system /sys/devices/platform/13000000.mali/js_ctx_scheduling_mode
+    chmod 0666 /sys/devices/platform/13000000.mali/js_ctx_scheduling_mode
+    chown system system /sys/devices/platform/13000000.mali/js_scheduling_period
+    chmod 0666 /sys/devices/platform/13000000.mali/js_scheduling_period
+    chown system system /sys/devices/platform/13000000.mali/dvfs_period
+    chmod 0666 /sys/devices/platform/13000000.mali/dvfs_period
 
 on post-fs-data
     # ZRAM setup
@@ -196,6 +204,9 @@ on property:sys.boot_completed=1
 
     write /proc/sys/kernel/sched_util_clamp_min_rt_default 96
     write /proc/sys/kernel/sched_util_clamp_min 128
+
+    # Configure DVFS
+    write /sys/kernel/ged/hal/dvfs_margin_value 130
 
     setprop vendor.powerhal.init 1
 

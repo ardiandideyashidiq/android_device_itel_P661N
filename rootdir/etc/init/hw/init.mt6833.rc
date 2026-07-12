@@ -404,8 +404,8 @@ on post-fs-data
     chown radio system /sys/devices/platform/mt-pmic/low_battery_protect_ut
 
     #MDDB
-    mkdir /data/vendor_de/meta 0770 system system
-    mkdir /data/vendor_de/meta/mddb 0770 system system
+    mkdir /data/vendor/meta 0770 system system
+    mkdir /data/vendor/meta/mddb 0770 system system
 
     chown system /sys/devices/platform/msensor/driver/cpsopmode
     chown system /sys/devices/platform/msensor/driver/cpsreptxy
@@ -956,6 +956,94 @@ on boot
     chown system radio /dev/ttyGS1
 #Power Manager
     write /sys/power/pm_freeze_timeout 2000
+
+on charger
+    chmod 0666 /sys/class/leds/aw2026_led/brightness
+    chown system system /sys/class/leds/aw2026_led/brightness
+    chmod 0666 /sys/devices/platform/soc/11d00000.i2c/i2c-1/1-0064/leds/aw2026_led/brightness
+    chmod 0666 /sys/devices/platform/soc/11d02000.i2c/i2c-3/3-0064/leds/aw2026_led/brightness
+    chmod 0666 /sys/devices/platform/soc/1101a000.i2c/i2c-6/6-0064/leds/aw2026_led/brightness
+    chown system system /sys/devices/platform/soc/11d00000.i2c/i2c-1/1-0064/leds/aw2026_led/brightness
+    chown system system /sys/devices/platform/soc/11d02000.i2c/i2c-3/3-0064/leds/aw2026_led/brightness
+    chmod 0666 /sys/class/power_supply/tran-auto-test/slave_temp
+    chmod 0666 /sys/class/power_supply/tran-auto-test/slave_soc
+    chmod 0666 /sys/class/power_supply/tran-auto-test/slave_fcc
+    chmod 0666 /sys/class/power_supply/tran-auto-test/slave_rc
+    chmod 0666 /sys/class/power_supply/tran-auto-test/run_path
+    chmod 0666 /sys/class/power_supply/tran-auto-test/old_car
+    chown system system /sys/class/power_supply/tran-auto-test/vbus
+    chown system system /sys/class/power_supply/tran-auto-test/ibus
+    chown system system /sys/class/power_supply/tran-auto-test/vbat
+    chown system system /sys/class/power_supply/tran-auto-test/ibat
+    chown system system /sys/class/power_supply/tran-auto-test/vta
+    chown system system /sys/class/power_supply/tran-auto-test/ita
+    chown system system /sys/class/power_supply/tran-auto-test/bat_temp
+    chown system system /sys/class/power_supply/tran-auto-test/pcb_temp
+    chown system system /sys/class/power_supply/tran-auto-test/sw_temp
+    chown system system /sys/class/power_supply/tran-auto-test/cp_temp
+    chown system system /sys/class/power_supply/tran-auto-test/usb_temp
+    chown system system /sys/class/power_supply/tran-auto-test/ta_temp
+    chown system system /sys/class/power_supply/tran-auto-test/chg_type
+    chown system system /sys/class/power_supply/tran-auto-test/chg_status
+    chown system system /sys/class/power_supply/tran-auto-test/soc
+    chown system system /sys/class/power_supply/tran-auto-test/r_cable
+    chown system system /sys/class/power_supply/tran-auto-test/game_mode
+    chown system system /sys/class/power_supply/tran-auto-test/cv
+    chown system system /sys/class/power_supply/tran-auto-test/iterm
+    chown system system /sys/class/power_supply/tran-auto-test/mivr
+    chown system system /sys/class/power_supply/tran-auto-test/ilmt
+    chown system system /sys/class/power_supply/tran-auto-test/fix_chg_type
+    chown system system /sys/class/power_supply/tran-auto-test/stop_chg
+    chown system system /sys/class/power_supply/tran-auto-test/quick_chg_back
+    chown system system /sys/class/power_supply/tran-auto-test/irq_test
+    chown system system /sys/class/power_supply/tran-auto-test/master_vbat
+    chown system system /sys/class/power_supply/tran-auto-test/master_ibat
+    chown system system /sys/class/power_supply/tran-auto-test/master_temp
+    chown system system /sys/class/power_supply/tran-auto-test/master_soc
+    chown system system /sys/class/power_supply/tran-auto-test/master_fcc
+    chown system system /sys/class/power_supply/tran-auto-test/master_rc
+    chown system system /sys/class/power_supply/tran-auto-test/slave_vbat
+    chown system system /sys/class/power_supply/tran-auto-test/slave_ibat
+    chown system system /sys/class/power_supply/tran-auto-test/slave_temp
+    chown system system /sys/class/power_supply/tran-auto-test/slave_soc
+    chown system system /sys/class/power_supply/tran-auto-test/slave_fcc
+    chown system system /sys/class/power_supply/tran-auto-test/slave_rc
+    chown system system /sys/class/power_supply/tran-auto-test/run_path
+    chown system system /sys/class/power_supply/tran-auto-test/old_car
+# MD_CHG:add for charger by kangning.hu 20230915 add start
+# battery long life
+	chown system system /sys/devices/platform/charger/tran_battery_cycle
+	chmod 0666 /sys/devices/platform/charger/tran_battery_cycle
+	chown system system /sys/devices/platform/charger/reset_nv_battery_cycle
+	chmod 0666 /sys/devices/platform/charger/reset_nv_battery_cycle
+	chown system system /sys/devices/platform/charger/cycle_test
+	chmod 0666 /sys/devices/platform/charger/cycle_test
+	chown system system /sys/devices/platform/charger/ffc_status_cv
+	chmod 0666 /sys/devices/platform/charger/ffc_status_cv
+	chown system system /sys/devices/platform/charger/battery_health_level
+	chmod 0664 /sys/devices/platform/charger/battery_health_level
+	chown system system /sys/devices/platform/charger/battery_health_percent
+	chmod 0664 /sys/devices/platform/charger/battery_health_percent
+# MD_CHG:add for charger by kangning.hu 20230915 add end
+	# MD_CHG:add for charger by kangning.hu 20230915 add end
+# USD:add for led by maoli.bin 20240902 start
+
+on charger
+    chmod 0666 /sys/class/leds/aw2026_led/brightness
+    chown system system /sys/class/leds/aw2026_led/brightness
+    chmod 0666 /sys/devices/platform/soc/11d00000.i2c/i2c-1/1-0064/leds/aw2026_led/brightness
+    chmod 0666 /sys/devices/platform/soc/11d02000.i2c/i2c-3/3-0064/leds/aw2026_led/brightness
+    chmod 0666 /sys/devices/platform/soc/1101a000.i2c/i2c-6/6-0064/leds/aw2026_led/brightness
+    chown system system /sys/devices/platform/soc/11d00000.i2c/i2c-1/1-0064/leds/aw2026_led/brightness
+    chown system system /sys/devices/platform/soc/11d02000.i2c/i2c-3/3-0064/leds/aw2026_led/brightness
+    chown system system /sys/devices/platform/soc/1101a000.i2c/i2c-6/6-0064/leds/aw2026_led/brightness
+    chmod 0666 /sys/class/leds/aw2013_led/brightness
+    chown system system /sys/class/leds/aw2013_led/brightness
+    chmod 0666 /sys/devices/platform/soc/11017000.i2c/i2c-5/5-0045/leds/aw2013_led/brightness
+    chown system system /sys/devices/platform/soc/11017000.i2c/i2c-5/5-0045/leds/aw2013_led/brightness
+    chown system system /sys/devices/platform/soc/11eb0000.i2c/i2c-2/2-0045/leds/aw2023_led/brightness
+    chmod 0666 /sys/devices/platform/soc/11eb0000.i2c/i2c-2/2-0045/leds/aw2023_led/brightness
+    start chg_sence
 
 on property:vold.decrypt=trigger_reset_main
     write /proc/bootprof "INIT:vold.decrypt=trigger_reset_main"
