@@ -133,8 +133,10 @@ TARGET_USERIMAGES_SPARSE_F2FS_DISABLED := true
 
 # SEPolicy
 include device/mediatek/sepolicy_vndr/SEPolicy.mk
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
+SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 # Security Patch Level
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
