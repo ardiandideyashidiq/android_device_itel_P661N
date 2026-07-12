@@ -93,6 +93,14 @@ on init
     write /proc/sys/kernel/sched_min_granularity_ns 500000
     write /proc/sys/kernel/sched_wakeup_granularity_ns 2000000
 
+    # Mali GPU sysfs nodes for libperfmgr (powerhint.json)
+    chown system system /sys/devices/platform/13000000.mali/js_ctx_scheduling_mode
+    chmod 0666 /sys/devices/platform/13000000.mali/js_ctx_scheduling_mode
+    chown system system /sys/devices/platform/13000000.mali/js_scheduling_period
+    chmod 0666 /sys/devices/platform/13000000.mali/js_scheduling_period
+    chown system system /sys/devices/platform/13000000.mali/dvfs_period
+    chmod 0666 /sys/devices/platform/13000000.mali/dvfs_period
+
 on post-fs-data
     # ZRAM setup
     write /sys/block/zram0/comp_algorithm lz4

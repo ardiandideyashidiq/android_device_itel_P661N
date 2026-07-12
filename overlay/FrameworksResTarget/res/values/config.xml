@@ -33,6 +33,14 @@
     -->
     <bool name="config_enableWifiDisplay">true</bool>
 
+    <!-- Disable Shared Connectivity Service (GMS Chimera). Leaving these strings empty
+         makes SharedConnectivityManager.create() return null, preventing SystemUI from
+         binding to a Chimera service that may not be fully deployed. -->
+    <string name="config_sharedConnectivityServicePackage"></string>
+    <string name="config_sharedConnectivityServiceIntentAction"></string>
+    <bool name="config_hotspotNetworksEnabledForService">false</bool>
+    <bool name="config_knownNetworksEnabledForService">false</bool>
+
     <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
          on the headphone/microphone jack. When false use the older uevent framework. -->
     <bool name="config_useDevInputEventForAudioJack">true</bool>
