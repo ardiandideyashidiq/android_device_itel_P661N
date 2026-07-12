@@ -289,6 +289,9 @@ ro.surface_flinger.vsync_sf_event_phase_offset_ns=-10933333
 # Trusted Execution Environment (TEE)
 ro.vendor.mtk_svp_on_mtee_support=1
 
+# USB
+vendor.usb.controller=musb-hdrc
+
 # Verity
 ro.apk_verity.mode=2
 
