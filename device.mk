@@ -181,6 +181,7 @@ PRODUCT_PACKAGES += \
     init.connectivity.rc \
     init.modem.rc \
     init.mt6833.rc \
+    init.mt6833.usb.rc \
     init.project.rc \
     init.recovery.mt6833.rc \
     init.sensor_2_0.rc \
@@ -342,8 +343,7 @@ PRODUCT_COPY_FILES += \
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.3.vendor \
-    android.hardware.usb.gadget@1.1.vendor \
-    init.mt6833.usb.rc
+    android.hardware.usb.gadget@1.1.vendor
 
 # vndservice
 PRODUCT_PACKAGES += \
