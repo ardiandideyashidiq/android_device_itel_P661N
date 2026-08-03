@@ -280,6 +280,16 @@
       "ResetOnInit": true
     },
     {
+      "Name": "DoubleTapToWake",
+      "Path": "/proc/gesture_function",
+      "Values": [
+        "cc2",
+        "cc1"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
       "Name": "PowerHALAudioState",
       "Path": "vendor.powerhal.audio",
       "Values": ["AUDIO_STREAMING_LOW_LATENCY", ""],
@@ -537,6 +547,12 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Type": "EndHint",
       "Value": "INTERACTION"
+    },
+    {
+      "PowerHint": "DOUBLE_TAP_TO_WAKE",
+      "Node": "DoubleTapToWake",
+      "Duration": 0,
+      "Value": "cc1"
     }
   ]
 }
