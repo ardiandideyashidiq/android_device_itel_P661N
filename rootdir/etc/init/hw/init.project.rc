@@ -65,10 +65,6 @@ on property:sys.boot_completed=1
     write /sys/kernel/tracing/instances/mmstat/events/mmstat/enable 1
     write /sys/kernel/tracing/instances/mmstat/tracing_on 1
 
-# fix dead zone on multi touch
-    write /sys/devices/platform/11010000.spi1/spi_master/spi1/spi1.0/misc/edge_restain 2
-    write /sys/devices/platform/11010000.spi1/spi_master/spi1/spi1.0/misc/game_mode 1
-
 #widevine driver node
     chmod 0660 /dev/drm_wv
     chown media system /dev/drm_wv
