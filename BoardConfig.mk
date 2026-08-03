@@ -107,7 +107,7 @@ BOARD_SYSTEM_EXTIMAGE_EROFS_COMPRESS_HINTS := $(DEVICE_PATH)/configs/erofs_compr
 BOARD_PRODUCTIMAGE_EROFS_COMPRESS_HINTS := $(DEVICE_PATH)/configs/erofs_compress_hints.txt
 BOARD_VENDORIMAGE_EROFS_COMPRESS_HINTS := $(DEVICE_PATH)/configs/erofs_compress_hints.txt
 
--include vendor/infinity/config/BoardConfigReservedSize.mk
+-include vendor/lineage/config/BoardConfigReservedSize.mk
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6833
