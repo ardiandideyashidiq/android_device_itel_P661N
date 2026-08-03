@@ -30,6 +30,9 @@
 /vendor/bin/hw/android\.hardware\.power-service\.pixel-libperfmgr                      u:object_r:hal_power_default_exec:s0
 /sys/devices/platform/soc/11017000.i2c/i2c-5/5-0053/power_supply/charger(/.*)?                     u:object_r:sysfs_batteryinfo:s0
 
+# Touch edge-restain (edgefixd)
+/vendor/bin/edgefixd                                                                            u:object_r:edgefixd_exec:s0
+
 # Sensor stuff
 /(vendor|system\/vendor)/bin/hw/android\.hardware\.sensors-service(\.multihal)?  u:object_r:hal_sensors_default_exec:s0
 

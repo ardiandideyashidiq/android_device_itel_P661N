@@ -1,0 +1,5 @@
+service edgefixd /vendor/bin/edgefixd
+    class main
+    user root
+    group root
+    seclabel u:r:edgefixd:s0

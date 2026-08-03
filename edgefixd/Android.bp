@@ -1,0 +1,8 @@
+cc_binary {
+    name: "edgefixd",
+    vendor: true,
+    srcs: ["edgefixd.c"],
+    shared_libs: ["liblog"],
+    init_rc: ["edgefixd.rc"],
+    cflags: ["-Wall", "-Wextra", "-Werror"],
+}
