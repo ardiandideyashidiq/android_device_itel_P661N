@@ -1299,7 +1299,6 @@ vendor/lib64/vendor.mediatek.hardware.mmagent@1.0.so
 vendor/lib64/vendor.mediatek.hardware.mmagent@1.1.so
 
 # Media C2
-vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b
 vendor/lib64/libadpcmdec_mtk.so
 vendor/lib64/libcodec2_mtk_c2store.so
 vendor/lib64/libcodec2_mtk_vdec.so

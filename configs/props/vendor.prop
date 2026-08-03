@@ -175,6 +175,7 @@ ro.lmk.thrashing_limit=30
 ro.lmk.thrashing_limit_decay=50
 
 # Media
+media.c2.hal.selection=aidl
 debug.stagefright.c2inputsurface=-1
 media.c2.dmabuf.padding=512
 media.stagefright.thumbnail.prefer_hw_codecs=true

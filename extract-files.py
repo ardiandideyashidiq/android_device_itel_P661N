@@ -66,9 +66,6 @@ def blob_fixup_return_1(
 blob_fixups: blob_fixups_user_type = {
     ('vendor/bin/hw/android.hardware.gnss-service.mediatek', 'vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so'): blob_fixup()
         .replace_needed('android.hardware.gnss-V1-ndk_platform.so', 'android.hardware.gnss-V1-ndk.so'),
-    'vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b': blob_fixup()
-        .add_needed('libstagefright_foundation-v33.so')
-        .replace_needed('libavservices_minijail_vendor.so', 'libavservices_minijail.so'),
     ('vendor/bin/hw/android.hardware.usb@1.2-service-mediatekv2', 'vendor/lib64/libgoodixhwfingerprint.so', 'vendor/bin/hw/android.hardware.neuralnetworks@1.3-service-mtk-neuron', 'vendor/lib/libnvram.so', 'vendor/lib64/libnvram.so', 'vendor/lib64/libsysenv.so'): blob_fixup()
         .add_needed('libbase_shim.so'),
     'vendor/bin/hw/camerahalserver': blob_fixup()
@@ -91,8 +88,6 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
     'vendor/etc/init/android.hardware.biometrics.fingerprint@2.1-service.transsion.rc': blob_fixup()
         .regex_replace('@2.1-service\n', '@2.1-service.transsion\n'),
-    'vendor/etc/init/android.hardware.media.c2@1.2-mediatek-64b.rc': blob_fixup()
-        .regex_replace('mediatek', 'mediatek-64b'),
     'vendor/etc/init/android.hardware.neuralnetworks@1.3-service-mtk-neuron.rc': blob_fixup()
         .regex_replace('start', 'enable'),
     'vendor/etc/vintf/manifest/manifest_media_c2_V1_2_default.xml': blob_fixup()
@@ -110,6 +105,15 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libhidlbase.so', 'libhidlbase-v32.so')
         .replace_needed('libutils.so', 'libutils-v32.so')
         .add_needed('libcamera_metadata_shim.so'),
+    (
+        'vendor/lib64/hw/sensors.mediatek.V2.0.so',
+        'vendor/lib64/libcodec2_mtk_c2store.so',
+        'vendor/lib64/libcodec2_mtk_vdec.so',
+        'vendor/lib64/libcodec2_mtk_venc.so',
+        'vendor/lib64/libcodec2_vpp_qt_plugin.so',
+        'vendor/lib64/libcodec2_vpp_rs_plugin.so'
+    ): blob_fixup()
+        .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
     'vendor/lib64/hw/android.hardware.sensors@2.X-subhal-mediatek.so': blob_fixup()
         .add_needed('android.hardware.sensors@1.0-convert-shared.so'),
     'vendor/lib64/hw/hwcomposer.mt6833.so': blob_fixup()
