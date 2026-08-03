@@ -18,6 +18,11 @@ on init
 
 on post-fs-data
 
+# Audio
+    mkdir /data/vendor/audiohal 0771 media audio
+    mkdir /data/vendor/audiohal/audio_param 0771 media audio
+    restorecon_recursive /data/vendor/audiohal
+
 #Camera
     chmod 0660 /dev/MAINAF
     chown system camera /dev/MAINAF

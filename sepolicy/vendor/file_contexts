@@ -23,6 +23,9 @@
 /sys/kernel/tran_fp(/.*)?                                                                       u:object_r:sysfs_fp_name_path:s0
 /data/vendor/goodix/gf_data(/.*)?                                                               u:object_r:vendor_gf_data_file:s0
 
+# Audio
+/data/vendor/audiohal(/.*)?                                                     u:object_r:mtk_audiohal_data_file:s0
+
 # Health
 /(vendor|system\/vendor)/bin/hw/android\.hardware\.health@2\.1-service         u:object_r:hal_health_default_exec:s0
 
