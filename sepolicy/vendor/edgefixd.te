@@ -8,4 +8,3 @@ allow edgefixd sysfs:file { open read write getattr };
 allow edgefixd proc:dir search;
 allow edgefixd proc:file { open read write getattr };
 allow edgefixd kmsg_device:chr_file { open read };
-allow edgefixd self:capability syslog;
