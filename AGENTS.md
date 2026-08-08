@@ -5,12 +5,13 @@ Android device tree for the itel P55 5G (**P661N**, a.k.a. P665L), MediaTek Dime
 ## Build context
 
 - Lunch target: `infinity_P661N` (see `infinity_P661N.mk`; `PRODUCT_NAME := infinity_P661N`). Build from the ROM root, never from here: `lunch infinity_P661N-userdebug && mka bacon`.
-- Companion repos are **outside this tree** — do not expect them here. Required (per `local_manifest-P661N/manifest.xml` in the parent dir):
-  - `device/itel/P661N-kernel` — prebuilt `dtbo.img`, `dtb/`, vendor `*.ko`, `ramdisk/modules.load`
+- Companion repos are **outside this tree** — do not expect them here. Required (verified via `device.mk`/`BoardConfig.mk` includes):
+  - `device/itel/P661N-kernel` — prebuilt `dtbo.img`, `dtb/`, vendor `*.ko`, `ramdisk/modules.load{,.recovery}`
   - `device/gki/common-kernel` — GKI `Image.gz` (this is the kernel; **no kernel source exists here**)
   - `vendor/itel/P661N` — extracted proprietary blobs (output of extract-files)
   - `vendor/infinity`, `vendor/mediatek/ims`, `vendor/sony/dolby`, `hardware/mediatek`, `device/mediatek/sepolicy_vndr`
-- Current branch is `testing`; origin manifest pins `lineage-23.2`.
+- **Kernel module load lists live in the `-kernel` repo**, not here: `BoardConfig.mk` reads `ramdisk/modules.load`, `ramdisk/modules.load.recovery`, and `vendor/modules.load` (and globs `vendor/*.ko`). To add/remove a module, edit those files in `device/itel/P661N-kernel`, not `BoardConfig.mk`.
+- Current branch is `testing`.
 
 ## Hardware / build facts that change behavior
 
@@ -25,7 +26,8 @@ Android device tree for the itel P55 5G (**P661N**, a.k.a. P665L), MediaTek Dime
 - `./extract-files.py` — shebang self-sets `PYTHONPATH=../../../tools/extract-utils`, so run it as `./extract-files.py` **from this repo root** (the relative path resolves against the ROM tree).
 - `setup-makefiles.py` is a stub that re-runs `./extract-files.py --regenerate_makefiles`.
 - `update-sha1sums.py` (and `-c` to strip hashes) computes SHA1s from files under `../../../vendor/itel/P661N/proprietary`.
-- `proprietary-files.txt` uses the `src:dest;FIX_SONAME` syntax. `proprietary-firmware.txt` holds unpinned firmware blobs (A/B partitions).
+- `proprietary-files.txt` uses the `src:dest;FIX_SONAME` syntax. `proprietary-firmware.txt` holds unpinned firmware blobs (A/B partitions, `img;AB` syntax).
+- `dev/` holds bring-up tooling beyond `BUG.md`: `blob_reconcile.py`, `fix-missing-blobs.py`, `resolve-missing-blobs.py`, `reorder-libs.py`, `reorder-props.py`, and `android_bringup_smoke.sh` (monkey + logcat harness; writes `bringup_reports/`). Read these before hand-editing `proprietary-files.txt`.
 - Stock firmware source is `sys_tssi_64_armv82_itel-user 13` (TP1A.220624.014) — blob names/versions must stay consistent with what the vendor tree holds.
 - `extract-files.py` contains all the soname fixups; the ROM-side convention is that version-suffixed libs (`libbinder-v32`, `libhidlbase-v32`, `libutils-v32`, `libtinyxml2-v34`, `libssl-v33`/`libcrypto-v33`, `libstagefright_foundation-v33`, …) are matched by these fixups and the `vndk/` prebuilts.
 
@@ -34,8 +36,9 @@ Android device tree for the itel P55 5G (**P661N**, a.k.a. P665L), MediaTek Dime
 - `libshims/` — only `libjni_shim` (engineering mode) lives here. `libbinder_shim`, `libbase_shim`, `libprocessgroup_shim`, `libhidlbase_shim`, `libcamera_metadata_shim` are referenced from `device.mk`/blob fixups but provided by `hardware/mediatek`.
 - `vndk/` — pinned prebuilt VNDK libs (v32/v33, arm64). Don't "fix" versions without matching blob fixups.
 - `edgefixd/` — custom C daemon (`cc_binary`, `-Werror`) enforcing Chipone touch edge restraint. Only self-built component besides shims.
-- `rootdir/` — `Android.bp` `prebuilt_etc` modules; when adding an `*.rc`, both the `Android.bp` entry and the `device.mk` `PRODUCT_PACKAGES` line are required.
-- `overlay/` vs `overlay-lineage/` — `PRODUCT_ENFORCE_RRO_TARGETS := *`; lineage overlays (`ApertureResTarget`) live in `overlay-lineage/`.
+- `rootdir/` — `Android.bp` `prebuilt_etc` modules; when adding an `*.rc`, both the `Android.bp` entry and the `device.mk` `PRODUCT_PACKAGES` line are required. No `*.rc` gets installed just by existing in `rootdir/etc/`.
+- `configs/` — `audio/`, `media/`, `seccomp/`, `wifi/` are bulk-copied into `vendor/etc` via `find-copy-subdir-files` (`device.mk`), so a new file there needs no Android.bp. Everything else (`permissions/`, `props/`, `sensors/`, `vintf/`, `powerhint.json`, `public.libraries.txt`, `thermal_info_config.json`) is wired individually in `device.mk`/`BoardConfig.mk`.
+- `overlay/` vs `overlay-lineage/` — `PRODUCT_ENFORCE_RRO_TARGETS := *`; lineage overlays (`ApertureResTarget`) live in `overlay-lineage/`, and each RRO name is explicitly listed in `device.mk` `PRODUCT_PACKAGES`.
 - `vendor_logtag.mk` — RIL/vendor log level is **S (silent) on user builds, I on eng** (`persist.log.tag.*`). This is deliberate "spammy log" silencing; don't re-add logs without following this pattern.
 - `configs/props/{system,vendor}.prop` feed `TARGET_SYSTEM_PROP`/`TARGET_VENDOR_PROP`.
 - sepolicy split across `sepolicy/{private,public,vendor}`; also includes `device/mediatek/sepolicy_vndr/SEPolicy.mk`. SELinux defaults to **enforcing** (the `androidboot.selinux=permissive` line is commented out in `BoardConfig.mk`).
