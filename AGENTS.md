@@ -9,7 +9,7 @@ Android device tree for the itel P55 5G (**P661N**, a.k.a. P665L), MediaTek Dime
   - `device/itel/P661N-kernel` — prebuilt `dtbo.img`, `dtb/`, vendor `*.ko`, `ramdisk/modules.load{,.recovery}`
   - `device/gki/common-kernel` — GKI `Image.gz` (this is the kernel; **no kernel source exists here**)
   - `vendor/itel/P661N` — extracted proprietary blobs (output of extract-files)
-  - `vendor/infinity`, `vendor/mediatek/ims`, `vendor/sony/dolby`, `hardware/mediatek`, `device/mediatek/sepolicy_vndr`
+  - `vendor/infinity`, `vendor/mediatek/ims`, `hardware/mediatek`, `device/mediatek/sepolicy_vndr`
 - **Kernel module load lists live in the `-kernel` repo**, not here: `BoardConfig.mk` reads `ramdisk/modules.load`, `ramdisk/modules.load.recovery`, and `vendor/modules.load` (and globs `vendor/*.ko`). To add/remove a module, edit those files in `device/itel/P661N-kernel`, not `BoardConfig.mk`.
 - Current branch is `testing`.
 
