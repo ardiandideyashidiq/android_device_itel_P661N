@@ -8,3 +8,7 @@ set_prop(vendor_init, vendor_mtk_camera_prop)
 get_prop(vendor_init, vts_status_prop)
 
 rw_dir_file(vendor_init, sysfs_ged)
+
+# Allow init to write FPSGO/FBT nodes for performance tuning
+r_dir_file(vendor_init, sysfs_fpsgo)
+allow vendor_init sysfs_fpsgo:file w_file_perms;

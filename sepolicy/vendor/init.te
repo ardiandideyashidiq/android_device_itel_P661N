@@ -4,3 +4,10 @@ allow init trustonic_kmsetkey_ca_exec:file execute;
 
 get_prop(init, vendor_mtk_service_nvram_restore_prop)
 get_prop(init, vts_status_prop)
+
+# Allow init to write FPSGO/FBT nodes for performance tuning
+r_dir_file(init, sysfs_fpsgo)
+allow init sysfs_fpsgo:file w_file_perms;
+
+# Allow init to write GED HAL nodes for GPU tuning
+allow init sysfs_ged:file w_file_perms;

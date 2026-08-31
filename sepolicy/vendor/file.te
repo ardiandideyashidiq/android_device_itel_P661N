@@ -27,5 +27,7 @@ type sysfs_wide_torch_file, fs_type, sysfs_type;
 
 # VMAX
 type aw87xxx_vmax, fs_type, sysfs_type;
+# FPSGO/FBT (frame-aware scheduling) - type + genfscon provided by
+# device/mediatek/sepolicy_vndr (see vendor_sepolicy.cil); only allows added here.
 # TNE
 type tneengine_tnek_file, dev_type, mlstrustedobject;

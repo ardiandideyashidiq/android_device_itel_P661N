@@ -1,0 +1,7 @@
+id=performance_boost
+name=Performance Boost
+version=v1.0
+versionCode=1
+author=InfinityOS
+description=Aggressive performance tuning for scrolling and gaming
+minApi=31

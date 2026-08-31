@@ -142,5 +142,9 @@ genfscon sysfs /devices/virtual/wide_torch/wide_torch/wide_torch_level          
 # Mali GPU sysfs (for libperfmgr/powerhint.json)
 genfscon sysfs /devices/platform/13000000.mali u:object_r:sysfs_gpu:s0
 
+# GED HAL + FPSGO/FBT genfscon (sysfs_ged, sysfs_fpsgo) already provided by
+# device/mediatek/sepolicy_vndr; only allows are added in hal_power_default.te
+# / init.te / vendor_init.te.
+
 # aw87xxx vmax
 genfscon sysfs /devices/platform/1101a000.i2c7/i2c-7/7-0058/vmax u:object_r:aw87xxx_vmax:s0

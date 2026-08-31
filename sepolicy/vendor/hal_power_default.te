@@ -22,3 +22,11 @@ allow hal_power_default sysfs_dvfsrc_devfreq:file rw_file_perms;
 # Allow libperfmgr to control task turbo
 r_dir_file(hal_power_default, sysfs_task_turbo)
 allow hal_power_default sysfs_task_turbo:file w_file_perms;
+
+# Allow libperfmgr to control FPSGO/FBT (frame-aware scheduling)
+r_dir_file(hal_power_default, sysfs_fpsgo)
+allow hal_power_default sysfs_fpsgo:file rw_file_perms;
+
+# Allow libperfmgr to access GED HAL (GPU DVFS tuning)
+allow hal_power_default sysfs_ged:dir r_dir_perms;
+allow hal_power_default sysfs_ged:file rw_file_perms;
