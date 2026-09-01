@@ -116,10 +116,6 @@ PRODUCT_PACKAGES += \
 # Dynamic Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-# FM Radio
-PRODUCT_PACKAGES += \
-    FMRadio
-
 # Radio
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.6.vendor \
